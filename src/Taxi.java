@@ -18,8 +18,8 @@ public class Taxi extends Car {
         fareCollected += (numRiders * farePerRider);
         if (getPassengers() >= 4 && !getDiscountStatus()) {
             setTollFee(getToll() * 0.5);
+            setDiscountApplied(true);
         }
-        setDiscountApplied(true);
     }
 
     public double getFareCollected() {

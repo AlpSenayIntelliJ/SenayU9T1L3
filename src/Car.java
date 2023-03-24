@@ -12,8 +12,8 @@ public class Car extends Vehicle {
         System.out.println("License plate: " + getLicensePlate());
         System.out.println("Toll fee: " + getToll());
         System.out.println("Passengers: " + getPassengers());
-        System.out.println("Is electric: " + electric);
-        System.out.println("Has discount: " + discountApplied);
+        System.out.println("Is electric: " + isElectric());
+        System.out.println("Has discount: " + getDiscountStatus());
     }
 
     public boolean isElectric() {
@@ -39,8 +39,8 @@ public class Car extends Vehicle {
     public void applyDiscount() {
         if (!discountApplied && isElectric()) {
             setTollFee(getToll() * 0.5);
+            discountApplied = true;
         }
-        discountApplied = true;
     }
 
 }

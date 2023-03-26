@@ -1,16 +1,14 @@
 public class Taxi extends Car {
     private double fareCollected;
-    public Taxi(String licensePlate, double tollFee, int passengers, boolean electric, double fareCollected) {
-        super(licensePlate, tollFee, passengers, electric);
+    public Taxi(String licensePlate, double tollFee, int passengers, boolean paidTollStation, boolean electric, double fareCollected) {
+        super(licensePlate, tollFee, passengers, paidTollStation, electric);
         this.fareCollected = fareCollected;
     }
-    public void printTaxi() {
-        System.out.println("License plate: " + getLicensePlate());
-        System.out.println("Toll fee: " + getToll());
-        System.out.println("Passengers: " + getPassengers());
-        System.out.println("Is electric: " + isElectric());
-        System.out.println("Has discount: " + getDiscountStatus());
-        System.out.println("Has collected fare: " + fareCollected);
+
+    @Override
+    public void printInfo() {
+        super.printInfo();
+        System.out.println("Collected fare: " + fareCollected);
     }
 
     public void pickupRiders(int numRiders, double farePerRider) {
@@ -24,5 +22,22 @@ public class Taxi extends Car {
 
     public double getFareCollected() {
         return fareCollected;
+    }
+
+    public boolean chargeAndDropOffRiders(double farePerRider) {
+        int numRiders = getPassengers() -1;
+        double totalFare = numRiders * farePerRider;
+        fareCollected += totalFare;
+        return dropOffPassengers(numRiders);
+    }
+
+    @Override
+    public boolean paidTollStation() {
+        int numRiders = getPassengers() -1;
+        if (numRiders > 4) {
+            fareCollected -= 5;
+            return true;
+        }
+        return false;
     }
 }
